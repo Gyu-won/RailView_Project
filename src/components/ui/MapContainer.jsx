@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Map from "./Map";
 
 const Wrapper = styled.div`
     border: 1px solid grey;
@@ -16,7 +17,7 @@ const Wrapper = styled.div`
 function MapContainer(props){
     return(
         <Wrapper>
-            <p>지도입니다.</p>
+            <Map />
         </Wrapper>
     );
 }
