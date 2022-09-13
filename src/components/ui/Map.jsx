@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CityItem from "./CityItem";
-import { GoogleMap, useJsApiLoader, Marker, Circle } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, Circle, OverlayView } from '@react-google-maps/api';
 
 const Wrapper = styled.div`
     border: 1px solid grey;
@@ -20,16 +20,28 @@ const containerStyle = {
   height: '400px'
 };
 
-const center = {
-  lat: 35.864676,
-  lng: 128.593345
+const divStyle = {
+    width: '60px',
+    height: '60px',
+    background: 'white',
+    border: '1px solid',
+    borderRadius: '30px',
+    textAlign: 'center',
+    transform: 'translate(-50%,-50%)'
 };
 
 const zoom = 16
 
-const population=200000
+const station_pos = {
+  lat: 35.864676,
+  lng: 128.593345
+};
 
-function MyComponent() {
+const population = 200000
+
+const station_name = "반월당"
+
+function Map() {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: "AIzaSyDNrTyztHjVlXK8p5MEqQhPg3gA8q_DZhA"
@@ -38,7 +50,6 @@ function MyComponent() {
     const [map, setMap] = React.useState(null)
 
     const onLoad = React.useCallback(function callback(map) {
-        const bounds = new window.google.maps.LatLngBounds(center);
         map.setZoom(zoom);
         setMap(map)
     }, [])
@@ -50,22 +61,32 @@ function MyComponent() {
     return isLoaded ? (
         <Wrapper>
             <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={zoom}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
+                mapContainerStyle={containerStyle}
+                center={station_pos}
+                zoom={zoom}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
             >
+                <OverlayView
+                    position={station_pos}
+                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                >
+                    <div style={divStyle}>
+                        <p>{station_name}</p>
+                        <p>{population}</p>
+                    </div>
+                </OverlayView>
+
                 <Marker
                     icon={{
                         path: window.google.maps.SymbolPath.CIRCLE,
                         scale: 7,
                     }}
-                    position={center}
+                    position={station_pos}
                 />
 
                 <Circle
-                    center={center}
+                    center={station_pos}
                     options={{
                         strokeColor: '#0000FF',
                         strokeOpacity: 0,
@@ -75,13 +96,12 @@ function MyComponent() {
                         clickable: false,
                         draggable: false,
                         editable: false,
-                        center: center,
                         radius: Math.sqrt(population) * 0.4,
                     }}
                 />
 
                 <Circle
-                    center={center}
+                    center={station_pos}
                     options={{
                         strokeColor: '#0000FF',
                         strokeOpacity: 0,
@@ -91,13 +111,12 @@ function MyComponent() {
                         clickable: false,
                         draggable: false,
                         editable: false,
-                        center: center,
                         radius: Math.sqrt(population) * 0.7,
                     }}
                 />
 
                 <Circle
-                    center={center}
+                    center={station_pos}
                     options={{
                         strokeColor: '#0000FF',
                         strokeOpacity: 0,
@@ -107,7 +126,6 @@ function MyComponent() {
                         clickable: false,
                         draggable: false,
                         editable: false,
-                        center: center,
                         radius: Math.sqrt(population) * 1.0,
                     }}
                 />
@@ -116,4 +134,4 @@ function MyComponent() {
     ) : <></>
 }
 
-export default React.memo(MyComponent)
+export default React.memo(Map)
