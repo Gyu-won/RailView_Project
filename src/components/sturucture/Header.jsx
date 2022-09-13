@@ -1,29 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import train from "../image/train.png"
 
-const StyledLogo = styled.h1`
+const StyledLogo = styled.div`
     font-size: 24px;
     font-weight: bold;
-    text-align: center;
+`;
+
+const LogoContainer = styled.div`
+    margin-inline: auto;
+`;
+
+const SubwayImage = styled.div`
+    
+    text-align: right;
+    float: right;
+`;
+
+const Box = styled.div`
+    background-color: GhostWhite;
 `;
 
 const Wrapper = styled.div`
     padding: 16px;
-    width: 95%;
+    width: 70%;
     display: flex;
-    flex-direction: row;
+    margin-inline: auto;
     align-items: center;
-    justify-content: center;
+`;
+
+const Title = styled.h2`
+    color: black;
 `;
 
 function Header(props) {
     return (
-        <Wrapper>
-            <StyledLogo>RailView</StyledLogo>
+        <Box>
+            <Wrapper>
+            <LogoContainer>
+                <StyledLogo><Title>RailView</Title></StyledLogo>
+            </LogoContainer>
+            <SubwayImage>
+                <img src={train} width="60px"/>
+            </SubwayImage>
         </Wrapper>
+        </Box>
+        
     );
 }
-// <StyledLogo><Link to="/">RailView</Link></StyledLogo>
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -17,6 +18,10 @@ const StyledLogo = styled.h1`
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+`;
+
+const Box = styled.div`
+    background-color: #f8f8f8;
 `;
 
 const ContentContainer = styled.div`
@@ -37,7 +42,8 @@ const LinkContainer = styled.div`
 
 function Footer(props){
     return(
-        <Wrapper>
+        <Box>
+            <Wrapper>
             <LogoContainer>
                 <StyledLogo>RailView</StyledLogo>
             </LogoContainer>
@@ -47,8 +53,13 @@ function Footer(props){
                     공개 SW 개발자 대회 RailView Project
                 </Content>
             </ContentContainer>
-            <LinkContainer>카카오맵, 데이터 포털 링크 넣을 예정</LinkContainer>
-        </Wrapper>
+            <LinkContainer>
+                <a href="https://developers.google.com/maps?hl=ko">구글맵 포털</a><br/>
+                <a href="https://www.data.go.kr/">공공데이터 포털</a>
+            </LinkContainer>
+            </Wrapper>
+        </Box>
+        
     )
 }
 

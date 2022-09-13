@@ -1,24 +1,20 @@
 import React from "react";
-import styled from "styled-components";
-import CityItem from "./CityItem";
-
-const Wrapper = styled.div`
-    border: 1px solid grey;
-    width: 70%;
-    height: 400px;
-    margin-inline: auto;
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: row;
-    aligh-itmes: flex-start;
-    justify-content: center;
-`;
+import { Map, GoogleApiWrapper } from "google-maps-react";
 
 function Map(props){
+    
+    const MapStyles = {
+        width: '100%',
+        height: '100%',
+    };
+
     return(
-        <Wrapper>
-            <p>지도입니다.</p>
-        </Wrapper>
+        <Map
+            google={this.props.google}
+            zoom={8}
+            style={mapStyles}
+            initialCenter={{lat: 35.864676, lng: 128.593345}}
+        />
     );
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import data from '../../data.json';
 import Header from "../sturucture/Header";
@@ -10,19 +9,23 @@ const Wrapper = styled.div`
     width: 100%;
 `;
 
+const Styleddiv = styled.div`
+    border-style: solid none none none;
+    border-color: #FFACB7;
+    height: 20px;
+    margin-inline: auto;
+`;
+
 function MainPage(props) {
     const {} = props;
-
-    const navigate = useNavigate();
 
     return (
         <Wrapper>
             <Header />
+            <Styleddiv />
             <CityList 
                 cities={data}
-                onClickCity={(city) => {
-                    navigate(`/view/${city.id}`);
-                }}/>
+                />
             <Footer />
         </Wrapper>
     );
